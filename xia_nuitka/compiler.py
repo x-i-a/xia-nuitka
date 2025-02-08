@@ -71,10 +71,10 @@ class Compiler:
 if __name__ == '__main__':
     print(f"Python Tag: {Compiler.get_python_tag()}")
     print(f"Platform Name: {Compiler.get_platform_name()}")
-    print(f"Step: {sys.argv[3]}")
-    if sys.argv[3] == "compile":
-        print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]}")
-        Compiler.compile_package(sys.argv[1], sys.argv[2])
-    elif sys.argv[3] == "build":
-        print(f"Build package:{sys.argv[1]} package:{sys.argv[2]}")
+    print(f"Step: {sys.argv[1]}")
+    if sys.argv[1] == "compile":
+        print(f"Compiling path:{sys.argv[2]} package:{sys.argv[3]}")
+        Compiler.compile_package(sys.argv[2], sys.argv[3])
+    elif sys.argv[1] == "build":
+        print(f"Build package")
         Compiler.build_package()

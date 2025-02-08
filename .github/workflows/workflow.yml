@@ -24,12 +24,12 @@ jobs:
         pip install nuitka
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/compiler.py tests xia_tests compile
+      run: python3 xia_nuitka/compiler.py compile tests xia_tests
 
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 ../xia_nuitka/compiler.py tests xia_tests build
+        python3 ../xia_nuitka/compiler.py build
 
     - name: Install Built Package
       run:
