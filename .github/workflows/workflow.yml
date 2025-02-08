@@ -28,11 +28,12 @@ jobs:
 
     - name: Build Wheel Package
       run: |
-        python3 tests/setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
+        cd tests
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
 
     - name: Install Built Package
       run:
-        pip install dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
+        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
 
     - name: Test Built Package
       run:
@@ -64,11 +65,11 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 tests/setup.py bdist_wheel --python-tag cp310 --plat-name macosx_11_0_x86_64 clean --all
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name macosx_11_0_x86_64 clean --all
 
     - name: Install Built Package
       run:
-        pip install dist/xia_tests-0.1.0-cp310-none-macosx_11_0_x86_64.whl
+        pip install tests/dist/xia_tests-0.1.0-cp310-none-macosx_11_0_x86_64.whl
 
     - name: Test Built Package
       run:
@@ -97,11 +98,11 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 tests/setup.py bdist_wheel --python-tag cp310 --plat-name win_amd64 clean --all
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name win_amd64 clean --all
 
     - name: Install Built Package
       run:
-        pip install dist/xia_tests-0.1.0-cp310-none-win_amd64.whl
+        pip install tests/dist/xia_tests-0.1.0-cp310-none-win_amd64.whl
 
     - name: Test Built Package
       run:
