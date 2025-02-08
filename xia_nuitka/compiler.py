@@ -22,7 +22,7 @@ class Compiler:
         print(stderr)
 
     @classmethod
-    def build_package(cls, root_path: str, package_name: str, mode: str):
+    def build_package(cls, root_path: str, package_name: str):
         python_tag = "cp310"
         plat_name = "macosx_11_0_x86_64"
         with os.chdir(package_name):
@@ -65,3 +65,4 @@ if __name__ == '__main__':
     print(f"Python Version: {sys.version}")
     print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]} mode: {sys.argv[3]}")
     Compiler.compile_package(sys.argv[1], sys.argv[2], sys.argv[3])
+    Compiler.build_package(sys.argv[1], sys.argv[2])
