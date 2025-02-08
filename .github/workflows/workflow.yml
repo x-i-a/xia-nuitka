@@ -37,11 +37,11 @@ jobs:
 
     - name: Install Built Package
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          pip install $(Get-ChildItem -Path tests/dist/xia_tests-*.whl | Select-Object -ExpandProperty FullName)
-        else
+        if ($env:RUNNER_OS -eq "Windows") {
+          pip install (Get-ChildItem -Path tests/dist/xia_tests-*.whl | Select-Object -ExpandProperty FullName)
+        } else {
           pip install tests/dist/xia_tests-*.whl
-        fi
+        }
 
     - name: Test Built Package
       run:
