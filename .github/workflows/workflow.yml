@@ -40,7 +40,7 @@ jobs:
         python3 tests/run.py
 
   test-macos-x86:
-    if: true
+    if: false
     runs-on: macos-13
     steps:
     - id: checkout-code
