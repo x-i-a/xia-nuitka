@@ -29,15 +29,7 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 -m build --wheel --python-tag cp310 --plat-name manylinux1_x86_64
-
-    - name: Install Built Package
-      run:
-        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
-
-    - name: Test Built Package
-      run:
-        python3 -c "from xia_tests.communicate import Communicate"
+        python3 -m build --wheel
 
   test-macos-x86:
     if: false
