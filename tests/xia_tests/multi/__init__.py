@@ -1,4 +1,4 @@
-from .language import Language
+from xia_tests.multi.language import Language
 
 
 __all__ = [

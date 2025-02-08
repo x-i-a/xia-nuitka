@@ -1,3 +1,3 @@
-from xia_tests.communicate import Communicate
+from xia_tests import Communicate
 
 Communicate.say_hello()
