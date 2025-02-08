@@ -29,7 +29,7 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 -m build --wheel
+        python3 -m build --wheel --config-setting python-tag=cp310
 
   test-macos-x86:
     if: false
