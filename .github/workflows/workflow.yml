@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Python Components
       run: |
-        pip install --upgrade setuptools wheel
+        pip install --upgrade setuptools wheel build
         pip install nuitka
 
     - name: Compile with Nuitka
