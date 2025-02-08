@@ -27,3 +27,11 @@ jobs:
       run: |
         cd tests
         python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
+
+    - name: Install Built Package
+      run:
+        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
+
+    - name: Test Built Package
+      run:
+        python3 -m xia_tests.main
