@@ -34,4 +34,4 @@ jobs:
 
     - name: Test Built Package
       run:
-        python3 -c "import xia_tests.main"
+        python3 -c "from xia_tests.communicate import Communicate"
