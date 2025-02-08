@@ -17,8 +17,8 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install Nuitka
-      run: pip install nuitka
+    - name: Install Python Components
+      run: pip install nuitka wheel
 
     - name: Compile with Nuitka
       run: python3 xia_nuitka/linux.py tests xia_tests linux
@@ -26,4 +26,4 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 setup.py bdist_wheel --python-tag cp39 --plat-name manylinux1_x86_64 clean --all
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
