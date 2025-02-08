@@ -2,6 +2,7 @@ import sys
 import logging
 import os
 import subprocess
+import platform
 
 
 class Compiler:
@@ -42,5 +43,13 @@ class Compiler:
 
 
 if __name__ == '__main__':
+    os_info = platform.uname()
+    print(f"System: {os_info.system}")
+    print(f"Node Name: {os_info.node}")
+    print(f"Release: {os_info.release}")
+    print(f"Version: {os_info.version}")
+    print(f"Machine: {os_info.machine}")
+    print(f"Processor: {os_info.processor}")
+    print(f"Python Version: {sys.version}")
     print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]} mode: {sys.argv[3]}")
     Compiler.compile_package(sys.argv[1], sys.argv[2], sys.argv[3])

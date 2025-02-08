@@ -40,7 +40,7 @@ jobs:
         python3 tests/run.py
 
   test-macos-x86:
-    if: false
+    if: true
     runs-on: macos-13
     steps:
     - id: checkout-code
@@ -76,7 +76,7 @@ jobs:
         python3 -c "from xia_tests.communicate import Communicate"
 
   test-win:
-    if: false
+    if: true
     runs-on: windows-2022
     steps:
     - id: checkout-code
