@@ -40,7 +40,7 @@ jobs:
         python3 -c "from xia_tests.communicate import Communicate"
 
   test-macos-x86:
-    if: false
+    if: true
     runs-on: macos-13
     steps:
     - id: checkout-code
@@ -98,7 +98,7 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 -m build --python-tag cp310 --plat-name win_amd64 clean --all
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name win_amd64 clean --all
 
     - name: Install Built Package
       run:
