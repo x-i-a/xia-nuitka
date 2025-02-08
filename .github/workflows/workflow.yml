@@ -25,5 +25,5 @@ jobs:
 
     - name: Build Wheel Package
       run: |
-        cd tests/xia_tests
+        cd tests
         python3 setup.py bdist_wheel --python-tag cp39 --plat-name manylinux1_x86_64 clean --all
