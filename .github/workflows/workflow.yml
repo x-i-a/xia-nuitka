@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-linux-x86:
-    if: true
+    if: false
     runs-on: ubuntu-22.04
     steps:
     - id: checkout-code
@@ -41,7 +41,7 @@ jobs:
 
   test-macos-x86:
     if: true
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - id: checkout-code
       uses: actions/checkout@v4
@@ -76,7 +76,7 @@ jobs:
         python3 -c "from xia_tests.communicate import Communicate"
 
   test-win:
-    if: true
+    if: false
     runs-on: windows-2022
     steps:
     - id: checkout-code

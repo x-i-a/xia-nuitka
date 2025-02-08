@@ -19,7 +19,8 @@ class Compiler:
 
     @classmethod
     def get_platform_name(cls):
-        return cls.PLATFORM_DICT.get((platform.uname().system, platform.uname().machine), None)
+        return cls.PLATFORM_DICT.get((platform.uname().system, platform.uname().machine),
+                                     (platform.uname().system, platform.uname().machine))
 
     @classmethod
     def exec_cmd(cls, command: str):
