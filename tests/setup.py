@@ -14,7 +14,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "xia-tests": ["*.so", "**/*.so"]
+        "tests": ["*.so", "**/*.so"]
     },
     classifiers=[
         "Programming Language :: Python :: 3",
