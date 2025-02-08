@@ -33,7 +33,7 @@ jobs:
 
     - name: Install Built Package
       run:
-        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
+        pip install tests/dist/xia_tests-*.whl
 
     - name: Test Built Package
       run:
