@@ -2,6 +2,9 @@ from setuptools import setup, find_packages
 from glob import glob
 import os
 
+binary_files = glob(f"xia_tests/**/*.so", recursive=True)
+package_binary_files = [os.path.relpath(f, "xia_tests") for f in binary_files]
+
 setup(
     name="xia-tests",
     version="0.1.0",
@@ -14,7 +17,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "tests": ["*.so", "**/*.so"]
+        "xia_tests": package_binary_files
     },
     classifiers=[
         "Programming Language :: Python :: 3",
