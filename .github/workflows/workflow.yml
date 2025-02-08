@@ -6,7 +6,7 @@ on:
     - main
 
 jobs:
-  test-linux:
+  test-linux-x86:
     if: false
     runs-on: ubuntu-latest
     steps:
@@ -37,8 +37,8 @@ jobs:
       run:
         python3 -c "from xia_tests.communicate import Communicate"
 
-  test-macos:
-    if: true
+  test-macos-x86:
+    if: false
     runs-on: macos-13
     steps:
     - id: checkout-code
@@ -71,3 +71,28 @@ jobs:
       run:
         python3 -c "from xia_tests.communicate import Communicate"
 
+  test-win:
+    if: true
+    runs-on: windows-2022
+    steps:
+    - id: checkout-code
+      uses: actions/checkout@v4
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install CCache
+      run: brew install ccache
+
+    - name: Install Python Components
+      run: pip install nuitka wheel
+
+    - name: Compile with Nuitka
+      run: python3 xia_nuitka/macos.py tests xia_tests linux
+
+    - name: Build Wheel Package
+      run: |
+        cd tests
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name win_amd64 clean --all
