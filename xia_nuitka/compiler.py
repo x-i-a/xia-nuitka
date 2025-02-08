@@ -68,4 +68,4 @@ if __name__ == '__main__':
     print(f"Python Version: {sys.version}")
     print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]} mode: {sys.argv[3]}")
     Compiler.compile_package(sys.argv[1], sys.argv[2], sys.argv[3])
-    Compiler.build_package(sys.argv[1], sys.argv[2])
+    # Compiler.build_package(sys.argv[1], sys.argv[2])
