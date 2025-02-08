@@ -6,6 +6,9 @@ import platform
 
 
 class Compiler:
+    @classmethod
+    def get_python_tag(cls):
+        return f"{sys.version}"
 
     @classmethod
     def exec_cmd(cls, command: str):
