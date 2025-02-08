@@ -35,13 +35,15 @@ jobs:
         cd tests
         python3 ../xia_nuitka/compiler.py build
 
-    - name: Install Built Package
+    - name: Install Built Package on Windows
+      if: runner.os == "Windows"
       run: |
-        if ($env:RUNNER_OS -eq "Windows") {
-          pip install (Get-ChildItem -Path tests/dist/xia_tests-*.whl | Select-Object -ExpandProperty FullName)
-        } else {
-          pip install tests/dist/xia_tests-*.whl
-        }
+        pip install $(Get-ChildItem -Path tests/dist/xia_tests-*.whl | Select-Object -ExpandProperty FullName)
+
+    - name: Install Built Package on Other OS
+      if: runner.os != "Windows"
+      run: |
+        pip install tests/dist/xia_tests-*.whl
 
     - name: Test Built Package
       run:
