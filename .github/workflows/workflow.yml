@@ -83,14 +83,11 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install CCache
-      run: brew install ccache
-
     - name: Install Python Components
       run: pip install nuitka wheel
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/macos.py tests xia_tests linux
+      run: python3 xia_nuitka/windows.py tests xia_tests linux
 
     - name: Build Wheel Package
       run: |
