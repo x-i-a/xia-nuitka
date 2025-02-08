@@ -37,7 +37,7 @@ jobs:
 
     - name: Test Built Package
       run:
-        python3 -c "from xia_tests.communicate import Communicate"
+        python3 tests/run.py
 
   test-macos-x86:
     if: false

@@ -1,4 +1,4 @@
-from xia_tests import Language
+from multi import Language
 
 
 class Communicate(Language):
