@@ -33,7 +33,7 @@ class Compiler:
     def compile_module(cls, root_path: str, package_name: str, module_path: str, module_name: str, mode: str = "winux"):
         assert(module_name.endswith(".py"))
         if mode in ["linux", "winux"]:
-            linux_compile = " ".join(["python3 -m nuitka --module --no-pyi-file --no-ccache",
+            linux_compile = " ".join(["python3 -m nuitka --module --no-pyi-file",
                                       "--remove-output --nofollow-imports",
                                       "--output-dir=" + os.path.join(root_path, package_name + module_path),
                                       os.path.join(root_path, package_name + module_path, module_name)])
