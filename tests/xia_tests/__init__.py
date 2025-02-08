@@ -1,4 +1,4 @@
-from communicate import Communicate
+from xia_tests.communicate import Communicate
 
 __all__ = [
     "Communicate"
