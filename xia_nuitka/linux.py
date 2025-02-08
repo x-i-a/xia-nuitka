@@ -37,6 +37,9 @@ class Compiler:
                                       "--output-dir=" + os.path.join(root_path, package_name + module_path),
                                       os.path.join(root_path, package_name + module_path, module_name)])
             cls.exec_cmd(linux_compile)
+        rm_source = " ".join(["rm", os.path.join(root_path, package_name + module_path, module_name)])
+        cls.exec_cmd(rm_source)
+
 
 if __name__ == '__main__':
     compile_mode = "linux"
