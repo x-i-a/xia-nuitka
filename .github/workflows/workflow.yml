@@ -29,7 +29,7 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 xia_nuitka/compiler.py tests xia_tests build
+        python3 ../xia_nuitka/compiler.py tests xia_tests build
 
     - name: Install Built Package
       run:
