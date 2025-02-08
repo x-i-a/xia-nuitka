@@ -6,9 +6,13 @@ on:
     - main
 
 jobs:
-  test-linux-x86:
-    if: true
-    runs-on: ubuntu-22.04
+  test:
+    name: Build & Test (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-13, windows-2022]
+        python: [3.10]
     steps:
     - id: checkout-code
       uses: actions/checkout@v4
@@ -16,7 +20,7 @@ jobs:
     - name: Set Up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: ${{ matrix.python }}
 
     - name: Install Python Components
       run: |
@@ -38,72 +42,3 @@ jobs:
     - name: Test Built Package
       run:
         python3 tests/run.py
-
-  test-macos-x86:
-    if: false
-    runs-on: macos-13
-    steps:
-    - id: checkout-code
-      uses: actions/checkout@v4
-
-    - name: Set Up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-
-    - name: Install CCache
-      run: brew install ccache
-
-    - name: Install Python Components
-      run: |
-        pip install --upgrade setuptools wheel
-        pip install nuitka
-
-    - name: Compile with Nuitka
-      run: python3 xia_nuitka/compiler.py tests xia_tests macos
-
-    - name: Build Wheel Package
-      run: |
-        cd tests
-        python3 setup.py bdist_wheel --python-tag cp310 --plat-name macosx_11_0_x86_64 clean --all
-
-    - name: Install Built Package
-      run:
-        pip install tests/dist/xia_tests-0.1.0-cp310-none-macosx_11_0_x86_64.whl
-
-    - name: Test Built Package
-      run:
-        python3 -c "from xia_tests.communicate import Communicate"
-
-  test-win:
-    if: false
-    runs-on: windows-2022
-    steps:
-    - id: checkout-code
-      uses: actions/checkout@v4
-
-    - name: Set Up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-
-    - name: Install Python Components
-      run: |
-        pip install --upgrade setuptools wheel
-        pip install nuitka
-
-    - name: Compile with Nuitka
-      run: python3 xia_nuitka/compiler.py tests xia_tests win
-
-    - name: Build Wheel Package
-      run: |
-        cd tests
-        python3 setup.py bdist_wheel --python-tag cp310 --plat-name win_amd64 clean --all
-
-    - name: Install Built Package
-      run:
-        pip install tests/dist/xia_tests-0.1.0-cp310-none-win_amd64.whl
-
-    - name: Test Built Package
-      run:
-        python3 -c "from xia_tests.communicate import Communicate"
