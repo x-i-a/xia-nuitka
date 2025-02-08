@@ -6,6 +6,7 @@ import platform
 
 
 class Compiler:
+
     @classmethod
     def exec_cmd(cls, command: str):
         logging.info(command)
@@ -19,6 +20,17 @@ class Compiler:
         print(stdout)
         logging.info(stderr)
         print(stderr)
+
+    @classmethod
+    def build_package(cls, root_path: str, package_name: str, mode: str):
+        python_tag = "cp310"
+        plat_name = "macosx_11_0_x86_64"
+        with os.chdir(package_name):
+            build_cmd = " ".join(["python3 setup.py bdist_wheel ",
+                                  f"--python-tag {python_tag}",
+                                  f"--plat-name {plat_name}",
+                                  "clean --all"])
+            print(build_cmd)
 
     @classmethod
     def compile_package(cls, root_path: str, package_name: str, mode: str):
