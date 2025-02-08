@@ -59,7 +59,8 @@ class Compiler:
     @classmethod
     def compile_module(cls, root_path: str, package_name: str, module_path: str, module_name: str):
         assert(module_name.endswith(".py"))
-        compile_cmd = " ".join(["python3 -m nuitka --module --no-pyi-file --remove-output --nofollow-imports",
+        compile_cmd = " ".join(["python3 -m nuitka --module --no-pyi-file --disable-ccache",
+                                "--remove-output --nofollow-imports",
                                 "--output-dir=" + os.path.join(root_path, package_name + module_path),
                                 os.path.join(root_path, package_name + module_path, module_name)])
         cls.exec_cmd(compile_cmd)
