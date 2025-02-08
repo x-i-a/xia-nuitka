@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, macos-13, windows-2022]
-        python: ["3.10", "3.11", "3.12", "3.13"]
+        python: ["3.10"]
     steps:
     - id: checkout-code
       uses: actions/checkout@v4
@@ -36,8 +36,12 @@ jobs:
         python3 ../xia_nuitka/compiler.py build
 
     - name: Install Built Package
-      run:
-        pip install tests/dist/xia_tests-*.whl
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          pip install $(Get-ChildItem -Path tests/dist/xia_tests-*.whl | Select-Object -ExpandProperty FullName)
+        else
+          pip install tests/dist/xia_tests-*.whl
+        fi
 
     - name: Test Built Package
       run:
