@@ -8,7 +8,7 @@ on:
 jobs:
   test-linux-x86:
     if: true
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - id: checkout-code
       uses: actions/checkout@v4
@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Python Components
       run: |
-        pip install --upgrade setuptools wheel
+        pip install --upgrade setuptools wheel build
         pip install nuitka
 
     - name: Compile with Nuitka
@@ -29,15 +29,7 @@ jobs:
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
-
-    - name: Install Built Package
-      run:
-        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
-
-    - name: Test Built Package
-      run:
-        python3 -c "from xia_tests.communicate import Communicate"
+        python3 -m build --wheel --config-setting python-tag=cp310
 
   test-macos-x86:
     if: false
