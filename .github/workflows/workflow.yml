@@ -20,16 +20,24 @@ jobs:
 
     - name: Install Python Components
       run: |
-        pip install --upgrade setuptools wheel build
+        pip install --upgrade setuptools wheel
         pip install nuitka
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/linux.py tests xia_tests linux
+      run: python3 xia_nuitka/compiler.py tests xia_tests linux
 
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 -m build --wheel --config-setting python-tag=cp310
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
+
+    - name: Install Built Package
+      run:
+        pip install tests/dist/xia_tests-0.1.0-cp310-none-manylinux1_x86_64.whl
+
+    - name: Test Built Package
+      run:
+        python3 -c "from xia_tests.communicate import Communicate"
 
   test-macos-x86:
     if: false
@@ -52,7 +60,7 @@ jobs:
         pip install nuitka
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/macos.py tests xia_tests linux
+      run: python3 xia_nuitka/compiler.py tests xia_tests macos
 
     - name: Build Wheel Package
       run: |
@@ -68,7 +76,7 @@ jobs:
         python3 -c "from xia_tests.communicate import Communicate"
 
   test-win:
-    if: false
+    if: true
     runs-on: windows-2022
     steps:
     - id: checkout-code
@@ -85,7 +93,7 @@ jobs:
         pip install nuitka
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/windows.py tests xia_tests linux
+      run: python3 xia_nuitka/compiler.py tests xia_tests win
 
     - name: Build Wheel Package
       run: |
