@@ -8,8 +8,10 @@ import platform
 class Compiler:
     PLATFORM_DICT = {
         ("Linux", "x86_64"): "manylinux1_x86_64",
+        ("Linux", "arm64"): "manylinux1_arm64",
         ("Windows", "AMD64"): "win_amd64",
         ("Darwin", "x86_64"): "macosx_11_0_x86_64",
+        ("Darwin", "arm64"): "macosx_11_0_arm64",
     }
 
     @classmethod
@@ -42,7 +44,7 @@ class Compiler:
                               f"--python-tag {cls.get_python_tag()}",
                               f"--plat-name {cls.get_platform_name()}",
                               "clean --all"])
-        print(build_cmd)
+        cls.exec_cmd(build_cmd)
 
     @classmethod
     def compile_package(cls, root_path: str, package_name: str):
@@ -69,6 +71,10 @@ class Compiler:
 if __name__ == '__main__':
     print(f"Python Tag: {Compiler.get_python_tag()}")
     print(f"Platform Name: {Compiler.get_platform_name()}")
-    print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]} mode: {sys.argv[3]}")
-    Compiler.compile_package(sys.argv[1], sys.argv[2])
-    Compiler.build_package()
+    print(f"Step: {sys.argv[3]}")
+    if sys.argv[3] == "compile":
+        print(f"Compiling path:{sys.argv[1]} package:{sys.argv[2]}")
+        Compiler.compile_package(sys.argv[1], sys.argv[2])
+    elif sys.argv[3] == "build":
+        print(f"Build package:{sys.argv[1]} package:{sys.argv[2]}")
+        Compiler.build_package()

@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-linux-x86:
-    if: false
+    if: true
     runs-on: ubuntu-22.04
     steps:
     - id: checkout-code
@@ -24,12 +24,12 @@ jobs:
         pip install nuitka
 
     - name: Compile with Nuitka
-      run: python3 xia_nuitka/compiler.py tests xia_tests linux
+      run: python3 xia_nuitka/compiler.py tests xia_tests compile
 
     - name: Build Wheel Package
       run: |
         cd tests
-        python3 setup.py bdist_wheel --python-tag cp310 --plat-name manylinux1_x86_64 clean --all
+        python3 xia_nuitka/compiler.py tests xia_tests build
 
     - name: Install Built Package
       run:
@@ -41,7 +41,7 @@ jobs:
 
   test-macos-x86:
     if: true
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - id: checkout-code
       uses: actions/checkout@v4
