@@ -3,7 +3,8 @@ from glob import glob
 import os
 
 binary_files = glob(f"xia_tests/**/*.so", recursive=True)
-package_binary_files = []
+binary_files += glob(f"xia_tests/**/*.pyd", recursive=True)
+package_binary_files = [os.path.relpath(f, "xia_tests") for f in binary_files]
 
 setup(
     name="xia-tests",

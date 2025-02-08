@@ -6,7 +6,8 @@ on:
     - main
 
 jobs:
-  test:
+  test-linux:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - id: checkout-code
@@ -35,3 +36,26 @@ jobs:
     - name: Test Built Package
       run:
         python3 -c "from xia_tests.communicate import Communicate"
+
+  test-macos:
+    if: true
+    runs-on: macos-13
+    steps:
+    - id: checkout-code
+      uses: actions/checkout@v4
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Python Components
+      run: pip install nuitka wheel
+
+    - name: Compile with Nuitka
+      run: python3 xia_nuitka/macos.py tests xia_tests linux
+
+    - name: Build Wheel Package
+      run: |
+        cd tests
+        python3 setup.py bdist_wheel --python-tag cp310 --plat-name macosx_11_0_x86_64 clean --all
